@@ -23,7 +23,7 @@ export default function Home() {
 
         <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
           <a
-            href="#"
+            href="/buy"
             className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-green focus:text-green"
           >
             <h3 className="text-2xl font-bold">Buy &rarr;</h3>
