@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 
 
 const products = [
@@ -92,6 +92,7 @@ import Modal from "../components/modal.jsx";
 import NavBar from "../components/navBar.jsx";
 
 export default function Home() {
+
 
   let [isOpen, setIsOpen] = useState(false)
 
