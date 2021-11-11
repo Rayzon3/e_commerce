@@ -187,13 +187,20 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-4 space-x-60">
                   <button
                     type="button"
-                    className="px-4 py-2 rounded-md bg-green text-midNight"
+                    className="px-4 py-2 text-white rounded-md bg-red"
                     onClick={closeModal}
                   >
-                    Buy
+                    Go Back
+                  </button>
+                  <button
+                    type="button"
+                    className="px-4 py-2 rounded-md text-midNight bg-green"
+                    onClick={closeModal}
+                  >
+                    Buy!
                   </button>
                 </div>
               </div>

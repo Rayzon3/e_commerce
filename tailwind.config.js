@@ -7,7 +7,8 @@ module.exports = {
       'midNight': '#243443',
       'green': '#2DF6AE',
       'white':'#FFFFFF',
-      'gray': '#808080'
+      'gray': '#808080',
+      'red': '#FF0000'
     }),
     textColor: theme => ({
       'midNight': '#243443',
