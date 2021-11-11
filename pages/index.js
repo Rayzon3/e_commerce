@@ -33,7 +33,7 @@ export default function Home() {
           </a>
 
           <a
-            href="#"
+            href="/sell"
             className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-green focus:text-green"
           >
             <h3 className="text-2xl font-bold">Sell &rarr;</h3>
