@@ -15,8 +15,8 @@ export default function NavBar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 space-x-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <button className="px-3 py-1 rounded bg-green transform motion-safe:hover:scale-110 ...">Login</button>
-                  <button className="px-3 py-1 rounded bg-green transform motion-safe:hover:scale-110 ...">Sign Up</button>
+                  <a href="/login"><button className="px-3 py-1 rounded bg-green transform motion-safe:hover:scale-110 ..." >Login</button></a>
+                  <a href="/signup"><button className="px-3 py-1 rounded bg-green transform motion-safe:hover:scale-110 ...">Sign Up</button></a>
               </div>
             </div>
           </div>

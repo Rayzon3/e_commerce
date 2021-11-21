@@ -1,5 +1,9 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
+import Head from "next/head";
+import Modal from "../components/modal.jsx";
+import NavBar from "../components/navBar.jsx";
+import axios from 'axios'
 
 
 const products = [
@@ -86,14 +90,26 @@ const products = [
 
   // More products...
 ];
-
-import Head from "next/head";
-import Modal from "../components/modal.jsx";
-import NavBar from "../components/navBar.jsx";
-
 export default function Home() {
 
   let [isOpen, setIsOpen] = useState(false)
+  const[product,setProduct] = useState([])
+   
+    
+
+  useEffect (()=>{
+    axios.get('http://127.0.0.1:8000/product/')
+    .then(res=>{
+      const product = res.data;
+      setProduct(product);
+    })
+    .catch((error) => {
+      if( error.response ){
+        console.log(error.response.data);
+       } // => the response payload 
+    })
+  },[]);
+
 
   function closeModal() {
     setIsOpen(false)
@@ -116,18 +132,19 @@ export default function Home() {
           <h2 className="sr-only">Products</h2>
 
           <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            {products.map((product) => (
-              <a key={product.id} href={product.href} className="group">
+            {product.map((prod) => (
+
+              <a key={prod.id} className="group">
                 <div className="w-full overflow-hidden bg-gray-200 rounded-lg aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8">
                   <img
-                    src={product.imageSrc}
-                    alt={product.imageAlt}
+                    src={prod.image}
+                    alt="product image"
                     className="object-cover object-center w-full h-full group-hover:opacity-75"
                   />
                 </div>
-                <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
+                <h3 className="mt-4 text-xl text-bold  text-gray-700">{prod.name}</h3>
                 <p className="mt-1 text-lg font-medium text-gray-900">
-                  {product.price}
+                  Price: {prod.price}
                 </p>
                 <button
                   className="px-4 py-2 rounded-md bg-green text-midNight hover:opacity-75"
@@ -144,7 +161,7 @@ export default function Home() {
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-10 overflow-y-auto bg-white"
+          className="fixed inset-0 z-10 overflow-y-auto"
           onClose={closeModal}
         >
           <div className="min-h-screen px-4 text-center">
@@ -176,7 +193,7 @@ export default function Home() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-2xl">
+              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
@@ -189,13 +206,20 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-4 space-x-60">
                   <button
                     type="button"
-                    className="px-4 py-2 rounded-md bg-green text-midNight"
+                    className="px-4 py-2 text-white rounded-md bg-red"
                     onClick={closeModal}
                   >
-                    Buy
+                    Go Back
+                  </button>
+                  <button
+                    type="button"
+                    className="px-4 py-2 rounded-md text-midNight bg-green"
+                    onClick={closeModal}
+                  >
+                    Buy!
                   </button>
                 </div>
               </div>
