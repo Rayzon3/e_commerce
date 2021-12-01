@@ -97,18 +97,18 @@ export default function Home() {
    
     
 
-  useEffect (()=>{
-    axios.get('http://127.0.0.1:8000/product/')
-    .then(res=>{
-      const product = res.data;
-      setProduct(product);
-    })
-    .catch((error) => {
-      if( error.response ){
-        console.log(error.response.data);
-       } // => the response payload 
-    })
-  },[]);
+  // useEffect (()=>{
+  //   axios.get('http://127.0.0.1:8000/product/')
+  //   .then(res=>{
+  //     const product = res.data;
+  //     setProduct(product);
+  //   })
+  //   .catch((error) => {
+  //     if( error.response ){
+  //       console.log(error.response.data);
+  //      } // => the response payload 
+  //   })
+  // },[]);
 
 
   function closeModal() {
@@ -132,12 +132,12 @@ export default function Home() {
           <h2 className="sr-only">Products</h2>
 
           <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            {product.map((prod) => (
+            {products.map((prod) => (
 
               <a key={prod.id} className="group">
                 <div className="w-full overflow-hidden bg-gray-200 rounded-lg aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8">
                   <img
-                    src={prod.image}
+                    src={prod.imageSrc}
                     alt="product image"
                     className="object-cover object-center w-full h-full group-hover:opacity-75"
                   />
@@ -147,11 +147,18 @@ export default function Home() {
                   Price: {prod.price}
                 </p>
                 <button
-                  className="px-4 py-2 rounded-md bg-green text-midNight hover:opacity-75"
+                  className="px-4 py-2 rounded-full bg-green text-midNight hover:opacity-75 mr-4"
+                  type="button"
+                  //onClick={}
+                >
+                  Add to Cart
+                </button>
+                <button
+                  className="px-4 py-2 rounded-full bg-green text-midNight hover:opacity-75"
                   type="button"
                   onClick={openModal}
                 >
-                  More
+                  Buy
                 </button>
               </a>
             ))}
@@ -198,28 +205,28 @@ export default function Home() {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Product Information
+                  Confirm Your Purchase!
                 </Dialog.Title>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
-                    This is product info, will come from api
+                    Do you want to buy this item.
                   </p>
                 </div>
 
-                <div className="mt-4 space-x-60">
+                <div className="mt-2 space-x-20 align-center">
                   <button
                     type="button"
-                    className="px-4 py-2 text-white rounded-md bg-red"
+                    className="px-4 py-2 mt-4 text-white rounded-full bg-red"
                     onClick={closeModal}
                   >
-                    Go Back
+                    Nah, Go Back
                   </button>
                   <button
                     type="button"
-                    className="px-4 py-2 rounded-md text-midNight bg-green"
+                    className="px-4 py-2 mt-4 rounded-full text-midNight bg-green"
                     onClick={closeModal}
                   >
-                    Buy!
+                    Yes, Buy Now!
                   </button>
                 </div>
               </div>
