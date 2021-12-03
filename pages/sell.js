@@ -1,92 +1,160 @@
-import {useRef} from 'react'
-import styles from '../styles/Sell.module.css'
+import {useState} from 'react'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import Container from '@material-ui/core/Container'
+import { makeStyles } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import { createTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core'
 
-const Sell = () => {
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#000000'
+      },
+      secondary: {
+          main: '#243443'
+      }
+    },
+  })
 
-  const titleInputRef = useRef()
-  const descriptionInputRef = useRef()
-  const priceInputRef = useRef()
-  const categoryInputRef = useRef()
+const useStyles = makeStyles((theme)=>{
+    return {
+    root: {
+        backgroundColor:'white',
+        borderRadius:5,
+        marginTop:theme.spacing(4),
+        paddingTop:theme.spacing(5),
+        paddingBottom:theme.spacing(5),
+        maxWidth:'90%',
+        width:'60rem',
+    },
+    field:{
+        marginTop: 16,
+        marginBottom: 16,
+        display: 'block',
+    },
+    field_col:{
+      // color: "white",
+    },
+    input: {
+      // color: "white",
+    },
+    form:{
+        margin:'auto'
+    },
+    notchedOutline: {
+        // border:'1.8px solid white !important'
+      },
+    }
+})
 
-  const submitHandler = (event)=>{
+const Sell1 = () => {
+  const classes = useStyles()
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState('')
+  const [category, setCategory] = useState('Item 1')
+
+const submitHandler = (event)=>{
     event.preventDefault();
-    const enteredTitleInput = titleInputRef.current.value;
-    const enteredDescriptionInput = descriptionInputRef.current.value;
-    const enteredPriceInput = priceInputRef.current.value;
-    const enteredCategoryInput = categoryInputRef.current.value;
     
     const data = {
-      title: enteredTitleInput,
-      description: enteredDescriptionInput,
-      price: enteredPriceInput,
-      category: enteredCategoryInput
+      title,
+      description,
+      price,
+      category
     }
     console.log("sending data")
     console.log(data)
-    // props.onSubmit(data)
   }
 
     return (
-        
-        <div className="flex flex-col py-2 bg-midNight center">
-            <form onSubmit={submitHandler} >
-                <h2 className={styles.title}>Add Product</h2>
+        <ThemeProvider theme={theme}>
+          <div className="min-h-screen  mx-auto py-2 bg-midNight">
+        <Container  size='lg' className={classes.root}> 
+        {/* <div className={classes.box}> */}
+            <Typography
+            align="center"
+            variant="h3" 
+            color="secondary"
+            gutterBottom
+            >
+                Add Product
+            </Typography>
 
-                <div className={styles.container1}>
+        <form noValidate autoComplete="off" onSubmit={submitHandler} className={classes.form}>
+            <TextField className={classes.field}
+            onChange={(e) => setTitle(e.target.value)}
+            label="Title" 
+            variant="outlined" 
+            fullWidth
+            required
+          //   InputLabelProps={{className:classes.input}}
+          //   InputProps={{
+          //   classes: {
+          //       root: classes.field_col,
+          //       notchedOutline: classes.notchedOutline,
+          //   }
+          // }}
+        />
+         <TextField className={classes.field}
+          onChange={(e) => setDescription(e.target.value)}
+          label="Description"
+          variant="outlined"
+          // color="secondary"
+          multiline
+          rows={4}
+          fullWidth
+          required
+        />
 
-                    <div className="mx-auto mt-15 mb-8">
-                            <label htmlFor="title" className="form-label">
-                            Title
-                            </label>
-                            <input
-                            type="text"
-                            className="ml-4"
-                            id="title"
-                            aria-describedby="emailHelp"
-                            ref = {titleInputRef}
-                            />
-                        </div>
+        <TextField className={classes.field}
+          onChange={(e) => setPrice(e.target.value)}
+          label="Price"
+          variant="outlined"
+          type='number'
+          fullWidth
+          required
+        //   error={detailsError}
+        />
 
-                        <div className="mx-auto mt-15 mb-8">
-                            <label htmlFor="description" className="form-label">
-                            Description
-                            </label>
-                            <textarea
-                            className="form-control"
-                            id="description"
-                            rows="4"
-                            ref ={descriptionInputRef}
-                            ></textarea>
-                            </div>
-
-                        <div className="mx-auto mt-15 mb-8">
-                        <label htmlFor="price" className="form-label">
-                            Price
-                            </label>
-                            <input type="number" className="form-control" id="price" ref={priceInputRef}  />
-                        </div>
-
-                        <label htmlFor="category" className="form-label">
-          Category
-        </label>
-      <select id='category' className="form-select mb-3" aria-label="Default select example" ref={categoryInputRef}>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-
-      <button type="submit" className="btn btn-primary">
-        Submit
-      </button>
-                 </div>
-
-                    
-
-                    
-
-            </form>
+        <FormControl  variant="outlined" className={classes.field}>
+            <InputLabel  id="select">Category</InputLabel>
+            <Select
+            labelId="select"
+            id="select"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            fullWidth
+            label="Category"
+            >
+                <MenuItem value="item1">Item 1</MenuItem>
+                <MenuItem value="item2">Item 2</MenuItem>
+                <MenuItem value="item3">Item 3</MenuItem>
+            </Select>
+        </FormControl>
+        <Typography align='center'>
+        <Button
+          type="submit" 
+          color="secondary"
+          align='center'
+          variant="contained"
+          gutterBottom
+          >
+          Submit
+        </Button>
+        </Typography>
+      </form>
+        </Container>
         </div>
-    
+        </ThemeProvider>
+        
     )
 }
-export default Sell;
+
+export default Sell1
