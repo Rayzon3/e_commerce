@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'user', 
     'corsheaders',
+    'knox',
     # 'rest-auth',
     # 'rest_framework.authtoken',
     # 'django.contrib.sites',
@@ -121,6 +122,11 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        'knox.auth.TokenAuthentication',
     ]
 }
 
