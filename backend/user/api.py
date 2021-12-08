@@ -9,10 +9,18 @@ from django.contrib.auth import login
 from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
+from django.db import migrations, models
+from django.http import HttpResponse
+import json
 
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        file = request.data['file']
+        image = Product.objects.create(image=file)
+        return HttpResponse(json.dumps({'message': "Uploaded"}), status=200)
 
 # Register API
 class RegisterAPI(generics.GenericAPIView):
