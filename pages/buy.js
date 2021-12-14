@@ -148,21 +148,6 @@ export default function Home() {
                   <p className="mt-1 text-lg font-medium text-gray-900">
                     Price: {prod.price}
                   </p>
-                  <div className="mr-2 mb-2 p-2">
-                    <button
-                      className="px-4 py-2 rounded-full bg-green text-midNight hover:opacity-75 mr-8 "
-                      type="button"
-                    >
-                      Add to Cart
-                    </button>
-                    <button
-                      className="px-4 py-2 rounded-full bg-green text-midNight hover:opacity-75"
-                      type="button"
-                      onClick={openModal}
-                    >
-                      Buy
-                    </button>
-                  </div>
                 </a>
               </div>
               </Link>
