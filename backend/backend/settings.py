@@ -42,15 +42,7 @@ INSTALLED_APPS = [
     'user', 
     'corsheaders',
     'knox',
-    # 'rest-auth',
-    # 'rest_framework.authtoken',
-    # 'django.contrib.sites',
-    # 'allauth',
-    # 'allauth.account',
-    # 'rest_auth.registration',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.facebook',
-    # 'allauth.socialaccount.providers.twitter',
+    'versatileimagefield',
 ]
 
 SITE_ID = 1

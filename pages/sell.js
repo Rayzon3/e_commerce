@@ -6,19 +6,22 @@ import axios from 'axios'
 const sell = () => {
 
     const headers = {
-      'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8;application/json' 
+      'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8;application/json',
+      'Accept' : 'application/json'
   }
 
   const [title, setTitle] = useState('');
   const [desc, setDesc]= useState('');
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('');
   const[image, setImage] = useState('');
 
   const handleSubmit = (e) => {
       e.preventDefault();
 
+      console.log(image);
       
-      axios.post('http://127.0.0.1:8000/product/',{
+      axios.post('http://127.0.0.1:8000/product/product/',
+      {
           name: title,
           desc : desc,
           price : price,
